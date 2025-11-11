@@ -1,190 +1,154 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 public class RegisterPage extends BasePage {
 
-    //=============================
-    // Sign Up Locators
-    //=============================
-    @FindBy(xpath = "//h2[contains(text(),'New User Signup!')]")
-    private WebElement newUserSignupText;
-
-    @FindBy(xpath = "//input[@data-qa='signup-name']")
-    private WebElement nameInput;
-
-    @FindBy(xpath = "//input[@data-qa='signup-email']")
-    private WebElement emailInput;
-
-    @FindBy(xpath = "//button[@data-qa='signup-button']")
-    private WebElement signupButton;
-
-    //=============================
-    // Account Information Locators
-    //=============================
-    @FindBy(xpath = "//b[contains(text(),'Enter Account Information')]")
-    private WebElement enterAccountInfoText;
-
-    @FindBy(id = "id_gender1")
-    private WebElement mrTitleRadio;
-
-    @FindBy(id = "password")
-    private WebElement passwordInput;
-
-    @FindBy(id = "days")
-    private WebElement daysDropdown;
-
-    @FindBy(id = "months")
-    private WebElement monthsDropdown;
-
-    @FindBy(id = "years")
-    private WebElement yearsDropdown;
-
-    @FindBy(id = "newsletter")
-    private WebElement newsletterCheckbox;
-
-    @FindBy(id = "optin")
-    private WebElement offersCheckbox;
-
-    //=============================
-    // Address Details Locators
-    //=============================
-    @FindBy(id = "first_name")
-    private WebElement firstNameInput;
-
-    @FindBy(id = "last_name")
-    private WebElement lastNameInput;
-
-    @FindBy(id = "company")
-    private WebElement companyInput;
-
-    @FindBy(id = "address1")
-    private WebElement address1Input;
-
-    @FindBy(id = "address2")
-    private WebElement address2Input;
-
-    @FindBy(id = "country")
-    private WebElement countryDropdown;
-
-    @FindBy(id = "state")
-    private WebElement stateInput;
-
-    @FindBy(id = "city")
-    private WebElement cityInput;
-
-    @FindBy(id = "zipcode")
-    private WebElement zipcodeInput;
-
-    @FindBy(id = "mobile_number")
-    private WebElement mobileNumberInput;
-
-    //=============================
-    // Account Creation Locators
-    //=============================
-    @FindBy(xpath = "//button[@data-qa='create-account']")
-    private WebElement createAccountButton;
-
-    @FindBy(xpath = "//b[contains(text(),'Account Created!')]")
-    private WebElement accountCreatedText;
-
-    @FindBy(xpath = "//a[@data-qa='continue-button']")
-    private WebElement continueButton;
-
-    @FindBy(xpath = "//a[contains(text(),'Logged in as')]")
-    private WebElement loggedInAsText;
-
-    @FindBy(xpath = "//a[contains(text(),'Delete Account')]")
-    private WebElement deleteAccountButton;
-
-    @FindBy(xpath = "//b[contains(text(),'Account Deleted!')]")
-    private WebElement accountDeletedText;
-
-    //=============================
-    // Constructor
-    //=============================
     public RegisterPage(WebDriver driver) {
         super(driver);
     }
 
-    //=============================
-    // Actions - Signup Section
-    //=============================
-    public boolean isNewUserSignupVisible() {
-        return newUserSignupText.isDisplayed();
+    @FindBy(name="name")
+    private WebElement nameTxt;
+
+    @FindBy(name="email")
+    private List<WebElement> emailsTxt;
+
+    @FindBy(css="#form > div > div > div:nth-child(3) > div > form > button")
+    private WebElement submitBtn;
+
+    @FindBy(id="id_gender1")
+    private WebElement genderRadioBtn;
+
+    @FindBy(id="password")
+    WebElement passwordTxt;
+
+    @FindBy(id="days")
+    WebElement daysList;
+
+    @FindBy(id="months")
+    WebElement monthsList;
+
+    @FindBy(id="years")
+    WebElement yearsList;
+
+    @FindBy(id="newsletter")
+    WebElement newsLetterCheckBox;
+
+    @FindBy(id="optin")
+    WebElement specialOffersCheckBox;
+
+    @FindBy(id="first_name")
+    WebElement firstNameTxt;
+
+    @FindBy(id="last_name")
+    WebElement lastNameTxt;
+
+    @FindBy(id="company")
+    WebElement companyTxt;
+
+    @FindBy(id="address1")
+    WebElement addressTxt1;
+
+    @FindBy(id="address2")
+    WebElement addressTxt2;
+
+    @FindBy(id="country")
+    WebElement countryList;
+
+    @FindBy(id="state")
+    WebElement stateTxt;
+
+    @FindBy(id="city")
+    WebElement cityTxt;
+
+    @FindBy(id="zipcode")
+    WebElement zipCodeTxt;
+
+    @FindBy(id="mobile_number")
+    WebElement mobileNumberTxt;
+
+    @FindBy(xpath="//*[@id=\"form\"]/div/div/div/div[1]/form/button")
+    WebElement createAccountBtn;
+
+    @FindBy(linkText = "Continue")
+    WebElement continueBtn;
+
+    @FindBy(linkText = "Delete Account")
+    public WebElement deleteAccountBtn;
+
+    @FindBy(xpath="//*[@id=\"form\"]/div/div/div[3]/div/h2")
+    public WebElement newUserMessage;
+
+    @FindBy(xpath="//*[@id=\"form\"]/div/div/div/div[1]/h2/b")
+    public WebElement enterAccountMessage;
+
+    @FindBy(xpath="//*[@id=\"form\"]/div/div/div/h2/b")
+    public WebElement successMessage;
+
+    @FindBy(xpath="//*[@id=\"form\"]/div/div/div/h2/b")
+    public WebElement deleteSuccessMessage;
+
+    @FindBy(css="#form > div > div > div:nth-child(3) > div > form > p")
+    public WebElement failedMessage;
+
+    public void userCanSignUpNewUser(String name,String email) {
+        nameTxt.sendKeys(name);
+        emailsTxt.get(1).sendKeys(email);
+
+        submitBtn.click();
     }
 
-    public void signup(String name, String email) {
-        nameInput.sendKeys(name);
-        emailInput.sendKeys(email);
-        signupButton.click();
+    public void userCanEnterAccountInformation(String password,String day,
+                                               String month,String year, String firstName,String lastName,
+                                               String company, String address1,String address2,String country,
+                                               String state,String city,String zipCode,String mobileNumber
+    ) {
+        genderRadioBtn.click();
+
+        passwordTxt.sendKeys(password);//
+
+        Select makeDaysList = new Select(daysList);
+        Select makeMonthsList = new Select(monthsList);
+        Select makeYearsList = new Select(yearsList);
+
+        makeDaysList.selectByVisibleText(day);
+        makeMonthsList.selectByVisibleText(month);
+        makeYearsList.selectByValue(year);
+
+        newsLetterCheckBox.click();
+        specialOffersCheckBox.click();
+
+        firstNameTxt.sendKeys(firstName);
+        lastNameTxt.sendKeys(lastName);
+        companyTxt.sendKeys(company);
+
+        addressTxt1.sendKeys(address1);
+        addressTxt2.sendKeys(address2);
+
+        Select makeCountryList = new Select(countryList);
+
+        makeCountryList.selectByVisibleText(country);
+
+        stateTxt.sendKeys(state);
+        cityTxt.sendKeys(city);
+
+        zipCodeTxt.sendKeys(zipCode);
+        mobileNumberTxt.sendKeys(mobileNumber);
+
+        createAccountBtn.click();
     }
 
-    //=============================
-    // Actions - Account Info Section
-    //=============================
-    public boolean isEnterAccountInfoVisible() {
-        return enterAccountInfoText.isDisplayed();
+    public void userCanContinue() {
+        continueBtn.click();
     }
 
-    public void fillAccountDetails(String password, String day, String month, String year) {
-        mrTitleRadio.click();
-        passwordInput.sendKeys(password);
-        daysDropdown.sendKeys(day);
-        monthsDropdown.sendKeys(month);
-        yearsDropdown.sendKeys(year);
-    }
-
-    public void selectCheckboxes() {
-        newsletterCheckbox.click();
-        offersCheckbox.click();
-    }
-
-    //=============================
-    // Actions - Address Section
-    //=============================
-    public void fillAddressDetails(String firstName, String lastName, String company, String address1,
-                                   String address2, String country, String state, String city,
-                                   String zipcode, String mobile) {
-        firstNameInput.sendKeys(firstName);
-        lastNameInput.sendKeys(lastName);
-        companyInput.sendKeys(company);
-        address1Input.sendKeys(address1);
-        address2Input.sendKeys(address2);
-        countryDropdown.sendKeys(country);
-        stateInput.sendKeys(state);
-        cityInput.sendKeys(city);
-        zipcodeInput.sendKeys(zipcode);
-        mobileNumberInput.sendKeys(mobile);
-    }
-
-    //=============================
-    // Actions - Account Creation Section
-    //=============================
-    public void clickCreateAccount() {
-        createAccountButton.click();
-    }
-
-    public boolean isAccountCreatedVisible() {
-        return accountCreatedText.isDisplayed();
-    }
-
-    public void clickContinue() {
-        continueButton.click();
-    }
-
-    public boolean isLoggedInVisible() {
-        return loggedInAsText.isDisplayed();
-    }
-
-    public void clickDeleteAccount() {
-        deleteAccountButton.click();
-    }
-
-    public boolean isAccountDeletedVisible() {
-        return accountDeletedText.isDisplayed();
+    public void deleteAccount() {
+        deleteAccountBtn.click();
     }
 }
-
