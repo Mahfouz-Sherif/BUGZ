@@ -9,9 +9,14 @@ import org.openqa.selenium.support.ui.Select;
 
 public class RegisterPage extends BasePage {
 
+    // Constructor
     public RegisterPage(WebDriver driver) {
         super(driver);
     }
+
+    // ===============================
+    // 🔹 Locators
+    // ===============================
 
     @FindBy(name="name")
     private WebElement nameTxt;
@@ -97,6 +102,9 @@ public class RegisterPage extends BasePage {
     @FindBy(css="#form > div > div > div:nth-child(3) > div > form > p")
     public WebElement failedMessage;
 
+    // ===============================
+    // 🔹 Page Actions
+    // ===============================
     public void userCanSignUpNewUser(String name,String email) {
         nameTxt.sendKeys(name);
         emailsTxt.get(1).sendKeys(email);
@@ -111,7 +119,7 @@ public class RegisterPage extends BasePage {
     ) {
         genderRadioBtn.click();
 
-        passwordTxt.sendKeys(password);//
+        passwordTxt.sendKeys(password);
 
         Select makeDaysList = new Select(daysList);
         Select makeMonthsList = new Select(monthsList);

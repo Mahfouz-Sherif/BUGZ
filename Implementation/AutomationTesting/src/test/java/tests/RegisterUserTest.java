@@ -9,57 +9,60 @@ public class RegisterUserTest extends BaseTest {
     private HomePage homePage;
     private RegisterPage registerPage;
 
-    @Test
-    public void testRegisterUser() throws InterruptedException {
+    @Test(priority = 1)
+    public void testValidRegisterUser() throws InterruptedException {
         // Initialize Page Objects
         homePage = new HomePage(driver);
         registerPage = new RegisterPage(driver);
         Thread.sleep(5000);
         // Verify home page is visible
-        Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
+        Assert.assertEquals(homePage.homeBtn.getCssValue("color"), "rgba(255, 165, 0, 1)");
 
-        // Navigate to Signup/Login
-        homePage.clickSignupLogin();
+        homePage.openRegisterPage();
+        Assert.assertEquals(registerPage.newUserMessage.getText(), "New User Signup!");
+        Thread.sleep(3000);
 
-        // Verify New User Signup section is visible
-        Assert.assertTrue(registerPage.isNewUserSignupVisible(), "'New User Signup!' is not visible");
+        registerPage.userCanSignUpNewUser("Mahfouz Sherif","mahfouzsherif10@gmail.com");
+        Assert.assertEquals(registerPage.enterAccountMessage.getText(), "ENTER ACCOUNT INFORMATION");
 
-        // Fill signup info
-        String name = "Mahfouz";
-        String email = "mahfouz" + System.currentTimeMillis() + "@example.com"; // unique email
-        registerPage.signup(name, email);
+        Thread.sleep(3000);
 
-        // Verify Enter Account Information section
-        Assert.assertTrue(registerPage.isEnterAccountInfoVisible(), "'ENTER ACCOUNT INFORMATION' is not visible");
+        registerPage.userCanEnterAccountInformation("123456789","15","June","1995","Mahfouz","Sherif","Example","Elsayeda","Elgize","United States","California","abcd","16798","01007751226");
+        Assert.assertEquals(registerPage.successMessage.getText(), "ACCOUNT CREATED!");
+        Thread.sleep(3000);
 
-        // Fill account information
-        registerPage.fillAccountDetails("Password123", "10", "May", "1995");
-        registerPage.selectCheckboxes();
+        registerPage.userCanContinue();
+        Assert.assertTrue(registerPage.deleteAccountBtn.isDisplayed());
 
-        // Fill address details
-        registerPage.fillAddressDetails(
-                "Mahfouz", "Sherif", "MyCompany", "123 Street", "Suite 1", "United States",
-                "Cairo", "Cairo", "12345", "0123456789"
-        );
+        Thread.sleep(3000);
 
-        // Create account
-        registerPage.clickCreateAccount();
 
-        // Verify account created
-        Assert.assertTrue(registerPage.isAccountCreatedVisible(), "'ACCOUNT CREATED!' is not visible");
+        registerPage.deleteAccount();
+        Assert.assertEquals(registerPage.deleteSuccessMessage.getText(), "ACCOUNT DELETED!");
 
-        // Continue to homepage
-        registerPage.clickContinue();
+        Thread.sleep(3000);
 
-        // Verify logged in
-        Assert.assertTrue(registerPage.isLoggedInVisible(), "'Logged in as username' is not visible");
-
-        // Delete account
-        registerPage.clickDeleteAccount();
-
-        // Verify account deleted
-        Assert.assertTrue(registerPage.isAccountDeletedVisible(), "'ACCOUNT DELETED!' is not visible");
-
-        registerPage.clickContinue();
+        registerPage.userCanContinue();
     }
+
+    @Test(priority = 2)
+    public void testInvalidRegisterUser() throws InterruptedException {
+        // Initialize Page Objects
+        homePage = new HomePage(driver);
+        registerPage = new RegisterPage(driver);
+        Thread.sleep(5000);
+        // Verify home page is visible
+        Assert.assertEquals(homePage.homeBtn.getCssValue("color"), "rgba(255, 165, 0, 1)");
+
+        homePage.openRegisterPage();
+        Assert.assertEquals(registerPage.newUserMessage.getText(), "New User Signup!");
+        Thread.sleep(3000);
+
+        registerPage.userCanSignUpNewUser("Mahfouz Sherif","mahfouzsherif@gmail.com");
+        Assert.assertTrue(registerPage.failedMessage.isDisplayed()
+                && registerPage.failedMessage.getCssValue("color").equals("rgba(255, 0, 0, 1)"));
+
+        Thread.sleep(3000);
+    }
+
 }
