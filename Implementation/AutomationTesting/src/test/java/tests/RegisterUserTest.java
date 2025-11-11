@@ -15,6 +15,7 @@ public class RegisterUserTest extends BaseTest {
         homePage = new HomePage(driver);
         registerPage = new RegisterPage(driver);
         Thread.sleep(5000);
+
         // Verify home page is visible
         Assert.assertEquals(homePage.homeBtn.getCssValue("color"), "rgba(255, 165, 0, 1)");
 
@@ -51,6 +52,7 @@ public class RegisterUserTest extends BaseTest {
         homePage = new HomePage(driver);
         registerPage = new RegisterPage(driver);
         Thread.sleep(5000);
+
         // Verify home page is visible
         Assert.assertEquals(homePage.homeBtn.getCssValue("color"), "rgba(255, 165, 0, 1)");
 
