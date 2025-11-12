@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class HomePage extends BasePage {
 
     // Constructor
@@ -15,7 +17,9 @@ public class HomePage extends BasePage {
     // 🔹 Locators
     // ===============================
 
-    // Navigation Links
+    @FindBy(xpath = "//h2[contains(text(),'Full-Fledged practice website for Automation Engineers')]")
+    public List<WebElement> practiceTxts;
+
     @FindBy(linkText = "Signup / Login")
     WebElement signUpBtn;
 
@@ -23,7 +27,13 @@ public class HomePage extends BasePage {
     public WebElement homeBtn;
 
     @FindBy(linkText = "Contact us")
-    WebElement contactUsBtn;
+    public WebElement contactUsBtn;
+
+    @FindBy(xpath = "//*[@id=\"footer\"]/div[1]/div/div/div[2]/div/h2")
+    public WebElement subscriptionTxt;
+
+    @FindBy(id ="scrollUp")
+    public WebElement scrollUpBtn;
 
     // ===============================
     // 🔹 Page Actions

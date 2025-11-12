@@ -1,14 +1,10 @@
 package tests;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pages.HomePage;
 import pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginUserTest extends BaseTest {
-
-    private static final Logger log = LoggerFactory.getLogger(LoginUserTest.class);
     private HomePage homePage;
     private LoginPage loginPage;
 
