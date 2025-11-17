@@ -23,7 +23,7 @@ public class RegisterUserTest extends BaseTest {
         Assert.assertEquals(registerPage.newUserMessage.getText(), "New User Signup!");
         Thread.sleep(3000);
 
-        registerPage.userCanSignUpNewUser("Mahfouz Sherif","mahfouzsherif10@gmail.com");
+        registerPage.userCanSignUpNewUser("Mahfouz Sherif","mahfouzsherif11@gmail.com");
         Assert.assertEquals(registerPage.enterAccountMessage.getText(), "ENTER ACCOUNT INFORMATION");
 
         Thread.sleep(3000);
@@ -60,7 +60,7 @@ public class RegisterUserTest extends BaseTest {
         Assert.assertEquals(registerPage.newUserMessage.getText(), "New User Signup!");
         Thread.sleep(3000);
 
-        registerPage.userCanSignUpNewUser("Mahfouz Sherif","mahfouzsherif@gmail.com");
+        registerPage.userCanSignUpNewUser("Mahfouz Sherif","mahfouzsherif11@gmail.com");
         Assert.assertTrue(registerPage.failedMessage.isDisplayed()
                 && registerPage.failedMessage.getCssValue("color").equals("rgba(255, 0, 0, 1)"));
 
