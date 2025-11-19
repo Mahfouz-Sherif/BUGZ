@@ -21,13 +21,16 @@ public class HomePage extends BasePage {
     public List<WebElement> practiceTxts;
 
     @FindBy(linkText = "Signup / Login")
-    WebElement signUpBtn;
+    private WebElement signUpBtn;
 
     @FindBy(linkText = "Home")
     public WebElement homeBtn;
 
     @FindBy(linkText = "Contact us")
-    public WebElement contactUsBtn;
+    private WebElement contactUsBtn;
+
+    @FindBy(linkText = "Test Cases")
+    private WebElement testCasesBtn;
 
     @FindBy(xpath = "//*[@id=\"footer\"]/div[1]/div/div/div[2]/div/h2")
     public WebElement subscriptionTxt;
@@ -67,5 +70,12 @@ public class HomePage extends BasePage {
      */
     public void openContactUsPage() {
         contactUsBtn.click();
+    }
+
+    /**
+     * Opens the Test Cases page.
+     */
+    public void openTestCasesPage() {
+        testCasesBtn.click();
     }
 }
