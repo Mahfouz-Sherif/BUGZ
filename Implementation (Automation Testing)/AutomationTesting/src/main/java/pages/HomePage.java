@@ -26,6 +26,9 @@ public class HomePage extends BasePage {
     @FindBy(linkText = "Home")
     public WebElement homeBtn;
 
+    @FindBy(linkText = "Cart")
+    private WebElement cartBtn;
+
     @FindBy(linkText = "Contact us")
     private WebElement contactUsBtn;
 
@@ -65,6 +68,13 @@ public class HomePage extends BasePage {
      */
     public void openLoginPage() {
         signUpBtn.click();
+    }
+
+    /**
+     * Opens the Cart page.
+     */
+    public void openCartPage() {
+        cartBtn.click();
     }
 
     /**
