@@ -49,6 +49,9 @@ public class HomePage extends BasePage {
 
     @FindBy(id ="scrollUp")
     public WebElement scrollUpBtn;
+    
+    @FindBy(css = "a[href='/products']")
+    private WebElement productsLink;
 
     // ===============================
     // 🔹 Page Actions
@@ -105,5 +108,11 @@ public class HomePage extends BasePage {
         subscriptionEmailTxt.sendKeys(email);
         subscriptionBtn.submit();
     }
+    
+    public ProductsPage openProductsPage() {
+        wait.until(ExpectedConditions.elementToBeClickable(productsLink)).click();
+        return new ProductsPage(driver);
+    }
+   
 
 }
