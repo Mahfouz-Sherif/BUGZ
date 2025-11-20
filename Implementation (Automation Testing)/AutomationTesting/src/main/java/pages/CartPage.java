@@ -105,4 +105,12 @@ public class CartPage extends BasePage {
         // Wait until the row disappears from DOM
         wait.until(ExpectedConditions.stalenessOf(cartRows.get(index)));
     }
+    
+    public void refreshCartPage() {
+        driver.navigate().refresh();
+        // Re-initialize the page elements
+        PageFactory.initElements(driver, this);
+        // Wait for cart rows to be visible (if any)
+        waitForCartRows(10);
+    }
 }
