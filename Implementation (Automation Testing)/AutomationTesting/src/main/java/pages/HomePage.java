@@ -35,6 +35,15 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"footer\"]/div[1]/div/div/div[2]/div/h2")
     public WebElement subscriptionTxt;
 
+    @FindBy(id="susbscribe_email")
+    private WebElement subscriptionEmailTxt;
+
+    @FindBy(id="subscribe")
+    private WebElement subscriptionBtn;
+
+    @FindBy(css = "#success-subscribe > div")
+    public WebElement subscriptionSuccessMessage;
+
     @FindBy(id ="scrollUp")
     public WebElement scrollUpBtn;
 
@@ -78,4 +87,13 @@ public class HomePage extends BasePage {
     public void openTestCasesPage() {
         testCasesBtn.click();
     }
+
+    /**
+     * Subscribes using email
+     */
+    public void subscribe(String email) {
+        subscriptionEmailTxt.sendKeys(email);
+        subscriptionBtn.submit();
+    }
+
 }
