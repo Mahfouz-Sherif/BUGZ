@@ -1,46 +1,110 @@
-package tests;
+package pages;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-import pages.CartPage;
-import pages.HomePage;
-import pages.ProductsPage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class AddProductsTest extends BaseTest {
-    HomePage homePage;
-    ProductsPage productsPage;
-    CartPage cartPage;
+import java.time.Duration;
+import java.util.List;
 
-    @Test(priority = 1)
-    public void TC12_addProductAndVerifyInCart() {
-        // init pages
-        homePage = new HomePage(driver);
-        productsPage = new ProductsPage(driver);
-        cartPage = new CartPage(driver);
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-        //  we are on home page
+public class CartPage extends BasePage {
 
-        homePage.openProductsPage();
-
-        // Choose which product index to add
-        int productIndex = 0;
-
-
-        productsPage.addProductToCartByIndex(productIndex);
-
-
-        String popupText = productsPage.waitForPopupMessageText(10);
-        Assert.assertTrue(popupText.contains("Your product has been added to cart"),
-                "Popup text mismatch. Actual: " + popupText);
-
-
-        productsPage.clickViewCartFromPopup(10);
-
-
-        boolean hasRows = cartPage.waitForCartRows(10);
-        Assert.assertTrue(hasRows, "Cart page does not show any product rows after adding.");
-
-        int quantity = cartPage.getQuantityForIndex(0);
-        Assert.assertEquals(quantity, 1, "Expected quantity 1 for added product.");
+    public CartPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
     }
+
+    // ===============================
+    // Mahfouz Loctors
+    // ===============================
+
+    @FindBy(xpath = "//*[@id=\"footer\"]/div[1]/div/div/div[2]/div/h2")
+    public WebElement subscriptionTxt;
+
+    @FindBy(id = "susbscribe_email")
+    private WebElement subscriptionEmailTxt;
+
+    @FindBy(id = "subscribe")
+    private WebElement subscriptionBtn;
+
+    @FindBy(css = "#success-subscribe > div")
+    public WebElement subscriptionSuccessMessage;
+
+    @FindBy(css = "#footer > div.footer-bottom")
+    public WebElement footer;
+
+    // ===============================
+    //  rahma Locators
+    // ===============================
+
+
+    @FindBy(css = "table#cart_info_table tbody tr")
+    public List<WebElement> cartRows;
+
+    @FindBy(css = "table#cart_info_table tbody tr td.cart_quantity button")
+    public List<WebElement> quantityButtons;
+
+    @FindBy(css = "table#cart_info_table tbody tr a > i.fa.fa-times")
+    public List<WebElement> removeIcons;
+
+    // fallback paragraph search (for “Cart is empty!”)
+    @FindBy(css = "p")
+    public List<WebElement> paragraphs;
+
+    // ===============================
+    // mahfouz methods
+    // ===============================
+
+    public void subscribe(String email) {
+        subscriptionEmailTxt.sendKeys(email);
+        subscriptionBtn.submit();
+    }
+
+    // ===============================
+    // rahma methods
+    // ===============================
+
+    public boolean waitForCartRows(int timeoutSeconds) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+            wait.until(ExpectedConditions.visibilityOfAllElements(cartRows));
+            return !cartRows.isEmpty();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public int getQuantityForIndex(int index) {
+        try {
+            String qText = quantityButtons.get(index).getText().trim();
+            return Integer.parseInt(qText);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public boolean isCartEmpty() {
+        return cartRows == null || cartRows.size() == 0;
+    }
+
+    public void removeProduct(int index) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(removeIcons.get(index)));
+        removeIcons.get(index).click();
+        wait.until(ExpectedConditions.stalenessOf(cartRows.get(index)));
+    }
+
+    public void refreshCartPage() {
+        driver.navigate().refresh();
+        // Re-initialize the page elements
+        PageFactory.initElements(driver, this);
+        // Wait for cart rows to be visible (if any)
+        waitForCartRows(10);
+    }
+
 }
