@@ -17,9 +17,21 @@ public class ProductsPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    @FindBy(css="body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > h2")
+    public WebElement allProductsTxt;
+
+    @FindBy(id = "search_product")
+    private WebElement searchTxt;
+
+    @FindBy(id = "submit_search")
+    private WebElement searchBtn;
+
+    @FindBy(css = "body > section:nth-child(3) > div > div > div.col-sm-9.padding-right > div > h2")
+    public WebElement searchProductTitle;
+
     // All product containers
     @FindBy(css = ".single-products")
-    private List<WebElement> products;
+    public List<WebElement> products;
 
 
     @FindBy(css = "#cartModal .modal-body > p.text-center")
@@ -27,6 +39,10 @@ public class ProductsPage extends BasePage {
 
     @FindBy(css = "#cartModal .modal-body p:nth-child(2) a")
     public WebElement viewCartLink;
+
+
+
+
 
     public void addProductToCartByIndex(int index) {
         WebElement product = products.get(index);
@@ -107,6 +123,29 @@ public class ProductsPage extends BasePage {
     }
 
 
+    public void SearchProduct(String name)
+    {
+        searchTxt.sendKeys(name);
+        searchBtn.click();
+    }
+
+    public boolean verifyAllProductTitlesContain(String word) {
+
+        for (WebElement product : products) {
+
+            // Find the title inside this product container
+            WebElement titleElement = product.findElement(By.cssSelector(".productinfo p"));
+
+            String title = titleElement.getText().trim().toLowerCase();
+
+            if (!title.contains(word.toLowerCase())) {
+                System.out.println("Product title does NOT contain '" + word + "': " + title);
+                return false;
+            }
+        }
+
+        return true; // All titles matched
+    }
 
 
 }

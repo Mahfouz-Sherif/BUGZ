@@ -256,6 +256,19 @@ public class CheckoutTests extends BaseTest{
         Assert.assertTrue(checkoutPage.orderSuccessMsg.isDisplayed());
         Assert.assertTrue(checkoutPage.downloadInvoiceLink.isDisplayed(), "Download Invoice link not visible!");
         checkoutPage.downloadInvoice();
+        checkoutPage.userCanContinue();
+        Thread.sleep(3000);
+
+        Assert.assertTrue(registerPage.deleteAccountBtn.isDisplayed());
+
+        Thread.sleep(3000);
+        registerPage.deleteAccount();
+        Assert.assertEquals(registerPage.deleteSuccessMessage.getText(), "ACCOUNT DELETED!");
+
+        Thread.sleep(3000);
+
+        registerPage.userCanContinue();
+
     }
 
 }

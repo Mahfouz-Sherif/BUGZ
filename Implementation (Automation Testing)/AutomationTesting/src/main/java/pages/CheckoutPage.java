@@ -79,6 +79,9 @@ public class CheckoutPage extends BasePage{
     )
     public WebElement orderSuccessMsg;
 
+    @FindBy(linkText = "Continue")
+    private WebElement continueBtn;
+
 
 
     // ===============================
@@ -97,5 +100,9 @@ public class CheckoutPage extends BasePage{
 
     public void downloadInvoice() {
         this.downloadInvoiceLink.click();
+    }
+
+    public void userCanContinue(){
+        continueBtn.click();
     }
 }
