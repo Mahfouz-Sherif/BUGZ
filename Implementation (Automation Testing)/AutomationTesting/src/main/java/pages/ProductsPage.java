@@ -17,12 +17,10 @@ public class ProductsPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-//locators
+    // All product containers
     @FindBy(css = ".single-products")
     private List<WebElement> products;
 
-    @FindBy(css = ".single-products .product-overlay .add-to-cart, a.add-to-cart, .btn.add-to-cart")
-    public List<WebElement> addToCartButtons;
 
     @FindBy(css = "#cartModal .modal-body > p.text-center")
     public WebElement popupMessage;
@@ -30,16 +28,6 @@ public class ProductsPage extends BasePage {
     @FindBy(css = "#cartModal .modal-body p:nth-child(2) a")
     public WebElement viewCartLink;
 
-    @FindBy(xpath = "//button[text()='Continue Shopping']")
-    public WebElement continueShoppingBtn;
-
-    @FindBy(id = "quantity")
-    public WebElement quantityInput;
-
-    @FindBy(css = "button.cart")
-    public WebElement addToCartButtonOnDetails;
-
-    //methods
     public void addProductToCartByIndex(int index) {
         WebElement product = products.get(index);
 
@@ -96,25 +84,7 @@ public class ProductsPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
         wait.until(ExpectedConditions.elementToBeClickable(viewCartLink)).click();
     }
-    public void clickContinueShoppingFromPopup(int timeoutSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
-        wait.until(ExpectedConditions.elementToBeClickable(continueShoppingBtn)).click();
-    }
 
-    public void waitForPopupToDisappear(int timeoutSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
-        wait.until(ExpectedConditions.invisibilityOf(popupMessage));
-    }
-
-    public void setProductQuantity(int quantity) {
-        quantityInput.clear();
-        quantityInput.sendKeys(String.valueOf(quantity));
-    }
-
-
-    public void addToCartFromDetails() {
-        addToCartButtonOnDetails.click();
-    }
 
     public void openProductByIndex(int index) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -135,6 +105,8 @@ public class ProductsPage extends BasePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", viewProductBtn);
         wait.until(ExpectedConditions.elementToBeClickable(viewProductBtn)).click();
     }
+
+
 
 
 }
