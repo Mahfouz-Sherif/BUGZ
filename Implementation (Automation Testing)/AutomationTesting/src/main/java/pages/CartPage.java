@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import java.time.Duration;
 import java.util.List;
 
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,6 +35,12 @@ public class CartPage extends BasePage {
 
     @FindBy(css = "#footer > div.footer-bottom")
     public WebElement footer;
+
+    @FindBy(linkText = "Proceed To Checkout")
+    private WebElement checkoutBtn;
+
+    @FindBy(linkText = "Register / Login")
+    public WebElement CheckoutLoginBtn;
 
 
     // ===============================
@@ -112,5 +119,10 @@ public class CartPage extends BasePage {
         PageFactory.initElements(driver, this);
         // Wait for cart rows to be visible (if any)
         waitForCartRows(10);
+    }
+
+    public void OpenCheckoutPage()
+    {
+        checkoutBtn.click();
     }
 }
