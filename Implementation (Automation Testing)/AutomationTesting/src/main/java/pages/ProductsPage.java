@@ -17,11 +17,10 @@ public class ProductsPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    // All product containers
+//locators
     @FindBy(css = ".single-products")
     private List<WebElement> products;
 
-    // Add to cart buttons inside overlay
     @FindBy(css = ".single-products .product-overlay .add-to-cart, a.add-to-cart, .btn.add-to-cart")
     public List<WebElement> addToCartButtons;
 
@@ -34,7 +33,13 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "//button[text()='Continue Shopping']")
     public WebElement continueShoppingBtn;
 
+    @FindBy(id = "quantity")
+    public WebElement quantityInput;
 
+    @FindBy(css = "button.cart")
+    public WebElement addToCartButtonOnDetails;
+
+    //methods
     public void addProductToCartByIndex(int index) {
         WebElement product = products.get(index);
 
@@ -99,6 +104,36 @@ public class ProductsPage extends BasePage {
     public void waitForPopupToDisappear(int timeoutSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
         wait.until(ExpectedConditions.invisibilityOf(popupMessage));
+    }
+
+    public void setProductQuantity(int quantity) {
+        quantityInput.clear();
+        quantityInput.sendKeys(String.valueOf(quantity));
+    }
+
+
+    public void addToCartFromDetails() {
+        addToCartButtonOnDetails.click();
+    }
+
+    public void openProductByIndex(int index) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Locate all product links matching the "View Product" href pattern
+        List<WebElement> productLinks = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.cssSelector("a[href*='/product_details/']")
+        ));
+
+        // Make sure the index exists
+        if (index >= productLinks.size()) {
+            throw new RuntimeException("Product index " + index + " is out of range. Only " + productLinks.size() + " products found.");
+        }
+
+        WebElement viewProductBtn = productLinks.get(index);
+
+        // Scroll into view and click
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", viewProductBtn);
+        wait.until(ExpectedConditions.elementToBeClickable(viewProductBtn)).click();
     }
 
 
