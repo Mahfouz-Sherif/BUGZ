@@ -1,0 +1,1069 @@
+{
+	"info": {
+		"_postman_id": "df5f25ab-cc7f-49a2-8d9a-1d7443ef6bb1",
+		"name": "Automation Exercise API Test Cases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44167646",
+		"_collection_link": "https://mahfouzsherif.postman.co/workspace/Mahfouz-Sherif's-Workspace~44975b5a-957d-406a-82de-b7d3878ceb83/collection/44167646-df5f25ab-cc7f-49a2-8d9a-1d7443ef6bb1?action=share&source=collection_link&creator=44167646"
+	},
+	"item": [
+		{
+			"name": "API 1: Get All Products List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 200",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 200",
+							"pm.test(\"Response contains 'responseCode' field with value 200\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('responseCode');",
+							"    pm.expect(jsonData.responseCode).to.eql(200);",
+							"});",
+							"",
+							"// Test 4: Verify response contains 'products' array",
+							"pm.test(\"Response contains 'products' array\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('products');",
+							"    pm.expect(jsonData.products).to.be.an('array');",
+							"});",
+							"",
+							"// Test 5: Verify products array is not empty",
+							"pm.test(\"Products array is not empty\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.products.length).to.be.above(0);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/productsList",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"productsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 2: POST To All Products List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 405",
+							"pm.test(\"Response status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has a valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 405",
+							"pm.test(\"Response contains 'responseCode' field with value 405\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.responseCode).to.eql(405);",
+							"});",
+							"",
+							"// Test 4: Verify response contains 'message' field with expected value",
+							"pm.test(\"Response contains 'message' field with value 'This request method is not supported.'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"This request method is not supported.\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/productsList",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"productsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 3: Get All Brands List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 200\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test 2: Verify response has a valid JSON body\r",
+							"pm.test(\"Response has valid JSON body\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"// Test 3: Verify response contains 'responseCode' field with value 200\r",
+							"pm.test(\"Response contains 'responseCode' field with value 200\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('responseCode');\r",
+							"    pm.expect(jsonData.responseCode).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"// Test 4: Verify response contains 'brands' array\r",
+							"pm.test(\"Response contains 'brands' array\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('brands');\r",
+							"    pm.expect(jsonData.brands).to.be.an('array');\r",
+							"});\r",
+							"\r",
+							"// Test 5: Verify brands array is not empty\r",
+							"pm.test(\"Brands array is not empty\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.brands.length).to.be.above(0);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/brandsList",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"brandsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 4: PUT To All Brands List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 405\r",
+							"pm.test(\"Response status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});\r",
+							"\r",
+							"// Test 2: Verify response has a valid JSON body\r",
+							"pm.test(\"Response has a valid JSON body\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"// Test 3: Verify response contains 'responseCode' field with value 405\r",
+							"pm.test(\"Response contains 'responseCode' field with value 405\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.responseCode).to.eql(405);\r",
+							"});\r",
+							"\r",
+							"// Test 4: Verify response contains 'message' field with expected value\r",
+							"pm.test(\"Response contains 'message' field with value 'This request method is not supported.'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"This request method is not supported.\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/brandsList",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"brandsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 5: POST To Search Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 200",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 200",
+							"pm.test(\"Response contains 'responseCode' field with value 200\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('responseCode');",
+							"    pm.expect(jsonData.responseCode).to.eql(200);",
+							"});",
+							"",
+							"// Test 4: Verify 'products' array exists in response",
+							"pm.test(\"Response contains 'products' array\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('products');",
+							"    pm.expect(jsonData.products).to.be.an('array');",
+							"});",
+							"",
+							"// Test 5: Verify 'products' array is not empty",
+							"pm.test(\"Products array is not empty\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.products.length).to.be.above(0);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "search_product",
+							"value": "dress",
+							"description": "Product keyword to search for",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/searchProduct",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"searchProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 6: POST To Search Product without search_product parameter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 400",
+							"pm.test(\"Response status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 400",
+							"pm.test(\"Response contains 'responseCode' field with value 400\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('responseCode');",
+							"    pm.expect(jsonData.responseCode).to.eql(400);",
+							"});",
+							"",
+							"// Test 4: Verify response contains 'message' field with expected value",
+							"pm.test(\"Response contains 'message' field with value 'This request method is not supported.'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"Bad request, search_product parameter is missing in POST request.\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/searchProduct",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"searchProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 7: POST To Verify Login with valid details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 200",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 200",
+							"pm.test(\"Response contains 'responseCode' field with value 200\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('responseCode');",
+							"    pm.expect(jsonData.responseCode).to.eql(200);",
+							"});",
+							"",
+							"// Test 4: Verify response contains 'message' field with expected value",
+							"pm.test(\"Response contains 'message' field with value 'User exists!'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"User exists!\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "validlogin@gmail.com",
+							"description": "email to login with",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "validpassword",
+							"description": "password to login with",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/verifyLogin",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 8: POST To Verify Login without email parameter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 400",
+							"pm.test(\"Response status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 400",
+							"pm.test(\"Response contains 'responseCode' field with value 400\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('responseCode');",
+							"    pm.expect(jsonData.responseCode).to.eql(400);",
+							"});",
+							"",
+							"// Test 4: Verify response contains 'message' field with expected value",
+							"pm.test(\"Response contains 'message' field with value 'Bad request.'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"Bad request, email or password parameter is missing in POST request.\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "password",
+							"value": "validpassword",
+							"description": "password to login with",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/verifyLogin",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 9: DELETE To Verify Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 405",
+							"pm.test(\"Response status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 405",
+							"pm.test(\"Response contains 'responseCode' field with value 405\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('responseCode');",
+							"    pm.expect(jsonData.responseCode).to.eql(405);",
+							"});",
+							"",
+							"// Test 4: Verify response contains 'message' field with expected value",
+							"pm.test(\"Response contains 'message' field with value 'request method not supported.'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"This request method is not supported.\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/verifyLogin",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 10: POST To Verify Login with invalid details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 404",
+							"pm.test(\"Response status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 404",
+							"pm.test(\"Response contains 'responseCode' field with value 404\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('responseCode');",
+							"    pm.expect(jsonData.responseCode).to.eql(404);",
+							"});",
+							"",
+							"// Test 4: Verify response contains 'message' field with expected value",
+							"pm.test(\"Response contains 'message' field with value 'User not found!'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"User not found!\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "invalidlogin@gmail.com",
+							"description": "email to login with",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "invalidpassword",
+							"description": "password to login with",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/verifyLogin",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 11: POST To Create/Register User Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 201",
+							"pm.test(\"Status code is 200 or 201\", function () {",
+							"    if (pm.response.code === 200) {",
+							"        pm.expect(pm.response.code).to.equal(200);",
+							"    } else if (pm.response.code === 201) {",
+							"        pm.expect(pm.response.code).to.equal(201);",
+							"    } else {",
+							"        // Handle any other unexpected status codes",
+							"        pm.expect.fail(`Unexpected status code: ${pm.response.code}`);",
+							"    }",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 201",
+							"pm.test(\"Response contains 'responseCode' field with value 201\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('responseCode');",
+							"    pm.expect(jsonData.responseCode).to.eql(201);",
+							"});",
+							"",
+							"// Test 4: Verify response contains 'message' field with expected value",
+							"pm.test(\"Response contains 'message' field with value 'User created!'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"User created!\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": " johndoe1231",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": " johndoe123551@example.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": " SecurePass123!",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": " Mr.",
+							"description": "values could be (Mr. - Mrs.)",
+							"type": "text"
+						},
+						{
+							"key": "birth_date",
+							"value": " 15",
+							"type": "text"
+						},
+						{
+							"key": "birth_month",
+							"value": " 6",
+							"type": "text"
+						},
+						{
+							"key": "birth_year",
+							"value": " 1990",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": " John",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": " Doe",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": " Tech Solutions Inc",
+							"type": "text"
+						},
+						{
+							"key": "address1",
+							"value": " 123 Main Street",
+							"type": "text"
+						},
+						{
+							"key": "address2",
+							"value": " Apartment 4B",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": " United States",
+							"description": "check website for valid values",
+							"type": "text"
+						},
+						{
+							"key": "zipcode",
+							"value": " 10001",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": " New York",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": " New York",
+							"type": "text"
+						},
+						{
+							"key": "mobile_number",
+							"value": " +1-555-0123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/createAccount",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"createAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 12: DELETE METHOD To Delete User Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    // if (pm.response.code === 200) {",
+							"        pm.expect(pm.response.code).to.equal(200);",
+							"    // } else if (pm.response.code === 201) {",
+							"    //     pm.expect(pm.response.code).to.equal(201);",
+							"    // } else {",
+							"    //     // Handle any other unexpected status codes",
+							"    //     pm.expect.fail(`Unexpected status code: ${pm.response.code}`);",
+							"    // }",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 200",
+							"pm.test(\"Response contains 'responseCode' field with value 200\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('responseCode');",
+							"    pm.expect(jsonData.responseCode).to.eql(200);",
+							"});",
+							"",
+							"// Test 4: Verify response contains 'message' field with expected value",
+							"pm.test(\"Response contains 'message' field with value 'Account deleted!'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"Account deleted!\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": " johndoe123@example.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": " SecurePass123!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/deleteAccount",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"deleteAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 13: PUT METHOD To Update User Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 200",
+							"pm.test(\"Response contains 'responseCode' field with value 200\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('responseCode');",
+							"    pm.expect(jsonData.responseCode).to.eql(200);",
+							"});",
+							"",
+							"// Test 4: Verify response contains 'message' field with expected value",
+							"pm.test(\"Response contains 'message' field with value 'User updated!'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"User updated!\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": " alex mark",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": " johndoe1231@example.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": " SecurePass123!",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": " Mr.",
+							"type": "text"
+						},
+						{
+							"key": "birth_date",
+							"value": " 13",
+							"type": "text"
+						},
+						{
+							"key": "birth_month",
+							"value": " 8",
+							"type": "text"
+						},
+						{
+							"key": "birth_year",
+							"value": " 1991",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": " Alex",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": " Mark",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": " NovaTech Dynamics",
+							"type": "text"
+						},
+						{
+							"key": "address1",
+							"value": " 456 Queen Street West",
+							"type": "text"
+						},
+						{
+							"key": "address2",
+							"value": " Unit 12A",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": " Canada",
+							"type": "text"
+						},
+						{
+							"key": "zipcode",
+							"value": " M5V 2B6",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": " Ontario",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": " Toronto",
+							"type": "text"
+						},
+						{
+							"key": "mobile_number",
+							"value": " +1-416-555-0123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/updateAccount",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"updateAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API 14: GET user account detail by email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test 1: Verify response status code is 200",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test 2: Verify response has a valid JSON body",
+							"pm.test(\"Response has valid JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test 3: Verify response contains 'responseCode' field with value 200",
+							"pm.test(\"Response contains 'responseCode' field with value 200\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('responseCode');",
+							"    pm.expect(jsonData.responseCode).to.eql(200);",
+							"});",
+							"",
+							"let jsonData = pm.response.json();",
+							"",
+							"// Test 4: Verify User object is present in json",
+							"pm.test(\"User object is present\", function () {",
+							"    pm.expect(jsonData).to.have.property(\"user\");",
+							"});",
+							"",
+							"// List of required fields",
+							"const requiredFields = [",
+							"    \"id\",",
+							"    \"name\",",
+							"    \"email\",",
+							"    \"title\",",
+							"    \"birth_day\",",
+							"    \"birth_month\",",
+							"    \"birth_year\",",
+							"    \"first_name\",",
+							"    \"last_name\",",
+							"    \"company\",",
+							"    \"address1\",",
+							"    \"address2\",",
+							"    \"country\",",
+							"    \"state\",",
+							"    \"city\",",
+							"    \"zipcode\"",
+							"];",
+							"",
+							"// Test 4: Verify User object contains required fields and details",
+							"pm.test(\"All required user fields are present\", function () {",
+							"    const user = jsonData.user;",
+							"    requiredFields.forEach(field => {",
+							"        pm.expect(user, `Missing field: ${field}`).to.have.property(field);",
+							"    });",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/getUserDetailByEmail?email= johndoe123551@example.com",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"getUserDetailByEmail"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": " johndoe123551@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
