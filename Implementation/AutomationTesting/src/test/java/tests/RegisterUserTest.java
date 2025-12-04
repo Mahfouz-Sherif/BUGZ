@@ -23,7 +23,7 @@ public class RegisterUserTest extends BaseTest {
         Assert.assertEquals(registerPage.newUserMessage.getText(), "New User Signup!");
         Thread.sleep(3000);
 
-        registerPage.userCanSignUpNewUser("Mahfouz Sherif","mahfouzsherif11@gmail.com");
+        registerPage.userCanSignUpNewUser("Mahfouz Sherif","mahfouzsherif13@gmail.com");
         Assert.assertEquals(registerPage.enterAccountMessage.getText(), "ENTER ACCOUNT INFORMATION");
 
         Thread.sleep(3000);
