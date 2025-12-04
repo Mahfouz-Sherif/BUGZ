@@ -2,7 +2,12 @@
 
 ## **Project Idea**
 
-**BUGZ** is a custom test execution tool with a Python-based GUI and a Java test backend. It enables testers to easily select and run specific test suites or individual test cases through an intuitive graphical interface. The tool streamlines automated testing by providing real-time feedback, structured reports, and flexible test management—making it faster and easier to identify and fix bugs.
+The idea of this project is to test the demo e-commerce website Automation
+Exercise.
+Automation Exercise provides a wide range of real-world e-commerce features
+such as user authentication, product browsing, cart management, checkout, and
+account handling. These make it an ideal platform for practicing manual testing,
+test automation, and API validation.
 
 
 ## **Team Members**
